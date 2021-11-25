@@ -29,7 +29,6 @@ namespace BancoByteBank
             sistema.Logar(diretor, "123");
             sistema.Logar(diretor, "abc");
 
-
             GerenteDeConta gerente = new GerenteDeConta("646.345.645-89");
             gerente.Nome = "Camila";
             gerente.Senha = "456";

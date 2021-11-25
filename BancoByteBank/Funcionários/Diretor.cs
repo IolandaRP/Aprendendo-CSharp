@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BancoByteBank.Sistemas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BancoByteBank.Funcionários
 {
-    public class Diretor : Funcionario
+    public class Diretor : Autenticavel
     {
 
         public Diretor(string cpf, double salario) : base(cpf, salario)
