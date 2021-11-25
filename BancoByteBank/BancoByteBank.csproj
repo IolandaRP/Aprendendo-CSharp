@@ -43,8 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Funcionários\Auxiliar.cs" />
+    <Compile Include="Funcionários\Desenvolvedor.cs" />
+    <Compile Include="Funcionários\Designer.cs" />
+    <Compile Include="Funcionários\Diretor.cs" />
+    <Compile Include="Funcionários\Funcionario.cs" />
+    <Compile Include="Funcionários\GerenteDeConta.cs" />
+    <Compile Include="GerenciadorBonificacao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sistemas\Autenticavel.cs" />
+    <Compile Include="Sistemas\SistemaInterno.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
