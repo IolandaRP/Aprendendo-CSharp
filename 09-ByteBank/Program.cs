@@ -9,60 +9,48 @@ namespace _09_ByteBank
     class Program
     {
         static void Main(string[] args)
-        { 
-
-            Metodo();
-            //
+        {
+            try
+            {
+                Metodo();
+            }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Aconteceu um erro.");   
+            }
+           
 
             Console.ReadLine();
         }
 
 
         //OUTROS MÉTODOS
-        private static int Metodo()
+        private static void Metodo()
         {
-            int resultadoDivisao = TestaDivisao(0);
-
-            if (resultadoDivisao == -2)
-            {
-                return -2;
-            }
-            return 0;
+             TestaDivisao(0);
         }
 
 
-        private static int TestaDivisao(int divisor)
+        private static void TestaDivisao(int divisor)
         {
-            int resultado = Dividir(10, divisor);
-
-            if(resultado == -2)
-            {
-                return -2;
+            try{
+                int resultado = Dividir(10, divisor);
+                Console.WriteLine("Resultado da divisão de 10 por " + divisor + "é " + resultado);
             }
-
-            if (resultado == -1)
+            catch (DivideByZeroException erro)
             {
-                Console.WriteLine("Não é possível fazer divisão por 0");
-                return -1;
+                Console.WriteLine(erro.Message);
+                Console.WriteLine("Não é possível fazer uma divisão por 0.");
             }
-            else
-            {
-                Console.WriteLine("Resultado da divisão de 10 por " + divisor + " é " + resultado);
-            }
-            return 0;
         }
 
 
         private static int Dividir(int numero, int divisor)
         {
-            if (divisor == 0)
-            {
-                return -1;
-            }
-            if (divisor > numero)
-            {
-                return -2;
-            } 
+            ContaCorrente conta = null;
+            //Console.WriteLine(conta.Saldo); Nesse caso ocorre uma exceção, pois a variável conta que não aponta para
+            //nenhum objeto, tenta acessar o atributo Saldo de um objeto que não existe ;p
+
             return numero / divisor;
         }
     }
