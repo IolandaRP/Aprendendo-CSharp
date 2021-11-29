@@ -14,13 +14,13 @@ namespace _09_ByteBank
             {
                 Metodo();
             }
-            catch (DivideByZeroException erro)
+            catch (DivideByZeroException e)
             {
                 Console.WriteLine("Não é possível divisão por 0.");
             }
-            catch (Exception erro)
+            catch (Exception e)
             {
-                Console.WriteLine(erro.Message);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("Aconteceu um erro.");   
             }
            
@@ -46,12 +46,16 @@ namespace _09_ByteBank
 
         private static int Dividir(int numero, int divisor)
         {
-            ContaCorrente conta = null;
-            // Console.WriteLine(conta.Saldo); 
-            // Nesse caso ocorre uma exceção, pois a variável conta que não aponta para
-            // nenhum objeto, tenta acessar o atributo Saldo de um objeto que não existe ;p
-
-            return numero / divisor;
+            try
+            {
+                return numero / divisor;
+            }
+            catch(DivideByZeroException erro)
+            {
+                Console.WriteLine("Exceção com número = " + numero + " e divisor = " + divisor);
+                throw;
+            }
+            
         }
     }
 }
