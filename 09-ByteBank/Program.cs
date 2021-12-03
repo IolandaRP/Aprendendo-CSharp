@@ -10,6 +10,22 @@ namespace _09_ByteBank
     {
         static void Main(string[] args)
         {
+
+            try
+            {
+                ContaCorrente conta = new ContaCorrente(12, 123);
+                conta.Depositar(50);
+                Console.WriteLine("Saldo: " + conta.Saldo);
+                conta.Sacar(500);
+            }
+            catch(ArgumentException e)
+            {
+                Console.WriteLine("Argumento com problema: " + e.ParamName);
+                Console.WriteLine(e.Message);
+            }
+
+
+            /*-------------------------------------------------------
             try
             {
                 Metodo();
@@ -22,7 +38,7 @@ namespace _09_ByteBank
             {
                 Console.WriteLine(e.Message);
                 Console.WriteLine("Aconteceu um erro.");   
-            }
+            }*/
            
            
 
