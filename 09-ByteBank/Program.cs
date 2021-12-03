@@ -23,6 +23,10 @@ namespace _09_ByteBank
                 Console.WriteLine("Argumento com problema: " + e.ParamName);
                 Console.WriteLine(e.Message);
             }
+            catch(SaldoInsuficienteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
 
             /*-------------------------------------------------------
