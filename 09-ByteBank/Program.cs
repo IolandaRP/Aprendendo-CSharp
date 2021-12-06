@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,40 @@ namespace _09_ByteBank
     class Program
     {
         static void Main(string[] args)
+        {
+            CarregarContas();
+
+            Console.ReadLine();
+        }
+
+
+        //OUTROS MÉTODOS
+
+        private static void CarregarContas()
+        {
+            LeitorDeArquivos leitor = null;
+            try
+            {
+                leitor = new LeitorDeArquivos("contas.txt");
+                leitor.LerProximaLinha();
+                leitor.LerProximaLinha();
+                leitor.LerProximaLinha();
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Exceção do tipo IOException capturada e tratada.");
+            }
+            finally //esse bloco SEMPRE é executado, ocorra ou não uma exceção.
+            {
+                if (leitor != null)
+                {
+                    leitor.Fechar();
+                }
+            }
+            
+        }
+
+        private static void TestaInnerException()
         {
             try
             {
@@ -23,26 +58,20 @@ namespace _09_ByteBank
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
                 //Console.WriteLine("Informações da INNER EXCEPTION");
-               // Console.WriteLine(e.InnerException.Message);
+                // Console.WriteLine(e.InnerException.Message);
             }
-
-            Console.ReadLine();
         }
 
-
-        //OUTROS MÉTODOS
         private static void Metodo()
         {
              TestaDivisao(0);
         }
-
 
         private static void TestaDivisao(int divisor)
         {
             int resultado = Dividir(10, divisor);
             Console.WriteLine("Resultado da divisão de 10 por " + divisor + "é " + resultado);
         }
-
 
         private static int Dividir(int numero, int divisor)
         {
