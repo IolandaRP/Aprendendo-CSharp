@@ -8,8 +8,10 @@ namespace _09_ByteBank
         private int NumeroConta { get; }
         public int Agencia { get; }
         private double _saldo = 100;
-        public static int TotalContasCriadas { get; private set; } //static pq é uma propriedade da classe, todos os objetos compartilham dessa informação
+        public static int TotalContasCriadas { get; private set; } 
         public static double TaxaOperacao { get; private set; }
+        public int SaquesNaoPermitidos { get; private set; }
+        public int TransferenciasNaoPermitidas { get; private set; }
 
         public ContaCorrente (int agencia, int numero)
         {
@@ -48,9 +50,14 @@ namespace _09_ByteBank
        
         public void Sacar(double valor)
         {
+            if (valor < 0)
+            {
+                throw new ArgumentException("O valor do saque deve ser maior que 0.", nameof(valor));
+            }
             if (_saldo < valor)
             {
-                throw new SaldoInsuficienteException("Saldo insuficiente para sacar " + valor + " reais.");
+                SaquesNaoPermitidos++;
+                throw new SaldoInsuficienteException(Saldo, valor);
             }
             else
             {
@@ -65,18 +72,30 @@ namespace _09_ByteBank
         }
 
 
-        public bool Transferir(double valor, ContaCorrente contaDestino)
+        public void Transferir(double valor, ContaCorrente contaDestino)
         {
+            if (valor < 0)
+            {
+                throw new ArgumentException("O valor da transferência deve ser maior que 0.", nameof(valor));
+            }
+
             if (_saldo < valor)
             {
-                return false;
+
+                throw new SaldoInsuficienteException(Saldo, valor);
             }
-            else
+
+            try
             {
-                _saldo -= valor;
-                contaDestino.Depositar(valor);
-                return true;
+                Sacar(valor);
             }
+            catch (SaldoInsuficienteException e)
+            {
+                TransferenciasNaoPermitidas++;
+                throw new Exception("Transferência não realizada.", e);
+;            }
+               
+            contaDestino.Depositar(valor);
         }
 
     }
