@@ -79,20 +79,14 @@ namespace _09_ByteBank
                 throw new ArgumentException("O valor da transferência deve ser maior que 0.", nameof(valor));
             }
 
-            if (_saldo < valor)
-            {
-
-                throw new SaldoInsuficienteException(Saldo, valor);
-            }
-
             try
             {
                 Sacar(valor);
             }
-            catch (SaldoInsuficienteException e)
+            catch (SaldoInsuficienteException ex)
             {
                 TransferenciasNaoPermitidas++;
-                throw new Exception("Transferência não realizada.", e);
+                throw new OperacaoFinanceiraException("Transferência não realizada.", ex);
 ;            }
                
             contaDestino.Depositar(valor);
